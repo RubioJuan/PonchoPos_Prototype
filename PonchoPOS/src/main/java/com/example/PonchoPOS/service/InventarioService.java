@@ -1,6 +1,7 @@
 package com.example.PonchoPOS.service;
 
 import com.example.PonchoPOS.model.Inventario;
+import com.example.PonchoPOS.repository.CategoriaRepository;
 import com.example.PonchoPOS.repository.InventarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -14,6 +15,8 @@ public class InventarioService {
 
     @Autowired
     private InventarioRepository inventarioRepository;
+    @Autowired
+    private CategoriaRepository categoriaRepository;
 
     // Obtener todos los productos del inventario
     public List<Inventario> getAllInventarios() {
@@ -25,7 +28,7 @@ public class InventarioService {
     }
 
     // Obtener producto del inventario por ID
-    public Optional<Inventario> getInventarioById(Long id) { // Cambiado a Long para que coincida con el repositorio
+    public Optional<Inventario> getInventarioById(Long id) {
         try {
             return inventarioRepository.findById(id);
         } catch (DataAccessException ex) {
@@ -36,17 +39,34 @@ public class InventarioService {
     // Guardar un producto en el inventario
     public Inventario saveInventario(Inventario inventario) {
         try {
+            int idCategoria = inventario.getId_categoria();
+
+            if (!categoriaRepository.existsById((long) idCategoria)) {
+                throw new IllegalArgumentException("La categoría con ID: " + idCategoria + " no existe.");
+            }
+
             return inventarioRepository.save(inventario);
+
         } catch (DataAccessException ex) {
             throw new RuntimeException("Error al guardar el producto en el inventario", ex);
         }
     }
 
+
     // Actualizar un producto en el inventario
-    public Inventario updateInventario(Long id, Inventario inventarioDetails) { // Cambiado a Long
+    public Inventario updateInventario(Long id, Inventario inventarioDetails) {
         try {
             Inventario inventario = inventarioRepository.findById(id)
                     .orElseThrow(() -> new IllegalArgumentException("Producto no encontrado con ID: " + id));
+
+            int idCategoria = inventarioDetails.getId_categoria();
+
+            Long idCategoriaLong = Long.valueOf(idCategoria);
+
+            if (!categoriaRepository.existsById(idCategoriaLong)) {
+                throw new IllegalArgumentException("La categoría con ID: " + idCategoria + " no existe.");
+            }
+
             inventario.setNombre(inventarioDetails.getNombre());
             inventario.setCantidad(inventarioDetails.getCantidad());
             inventario.setPrecio_costo(inventarioDetails.getPrecio_costo());
@@ -55,15 +75,17 @@ public class InventarioService {
             inventario.setEan(inventarioDetails.getEan());
             inventario.setDescripcion(inventarioDetails.getDescripcion());
             inventario.setFecha_ingreso(inventarioDetails.getFecha_ingreso());
-            inventario.setId_categoria(inventarioDetails.getId_categoria());
+            inventario.setId_categoria(idCategoria); // Guardar idCategoria como int
+
             return inventarioRepository.save(inventario);
+
         } catch (DataAccessException ex) {
             throw new RuntimeException("Error al actualizar el producto con ID: " + id, ex);
         }
     }
 
     // Eliminar un producto del inventario
-    public void deleteInventario(Long id) { // Cambiado a Long
+    public void deleteInventario(Long id) {
         try {
             inventarioRepository.findById(id)
                     .orElseThrow(() -> new IllegalArgumentException("Producto no encontrado con ID: " + id));

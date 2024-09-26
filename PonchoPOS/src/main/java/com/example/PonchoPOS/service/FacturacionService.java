@@ -1,6 +1,7 @@
 package com.example.PonchoPOS.service;
 
 import com.example.PonchoPOS.model.Facturacion;
+import com.example.PonchoPOS.repository.ClientesRepository;
 import com.example.PonchoPOS.repository.FacturacionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -14,6 +15,8 @@ public class FacturacionService {
 
     @Autowired
     private FacturacionRepository facturacionRepository;
+    @Autowired
+    private ClientesRepository clientesRepository;
 
     // Obtener todas las facturas
     public List<Facturacion> getAllFacturas() {
@@ -25,7 +28,7 @@ public class FacturacionService {
     }
 
     // Obtener factura por ID
-    public Optional<Facturacion> getFacturacionById(Integer id) { // Cambiado a Integer
+    public Optional<Facturacion> getFacturacionById(Integer id) {
         try {
             return facturacionRepository.findById(id);
         } catch (DataAccessException ex) {
@@ -36,6 +39,12 @@ public class FacturacionService {
     // Guardar una factura
     public Facturacion saveFacturacion(Facturacion facturacion) {
         try {
+            int idCategoria = facturacion.getId_cliente();
+
+            if (!clientesRepository.existsById(idCategoria)) {
+                throw new IllegalArgumentException("La categoría con ID: " + idCategoria + " no existe.");
+            }
+
             return facturacionRepository.save(facturacion);
         } catch (DataAccessException ex) {
             throw new RuntimeException("Error al guardar la factura", ex);
@@ -43,12 +52,18 @@ public class FacturacionService {
     }
 
     // Actualizar una factura
-    public Facturacion updateFacturacion(Integer id, Facturacion facturacionDetails) { // Cambiado a Integer
+    public Facturacion updateFacturacion(Integer id, Facturacion facturacionDetails) {
         try {
             Facturacion facturacion = facturacionRepository.findById(id)
                     .orElseThrow(() -> new IllegalArgumentException("Factura no encontrada con ID: " + id));
+
+            int idCliente = facturacionDetails.getId_cliente();
+
+            if (!clientesRepository.existsById(idCliente)) {
+                throw new IllegalArgumentException("La categoría con ID: " + idCliente + " no existe.");
+            }
             facturacion.setNumero_factura(facturacionDetails.getNumero_factura());
-            facturacion.setId_cliente(facturacionDetails.getId_cliente());
+            facturacion.setId_cliente(idCliente);
             facturacion.setFecha(facturacionDetails.getFecha());
             facturacion.setSubtotal(facturacionDetails.getSubtotal());
             facturacion.setDescuento(facturacionDetails.getDescuento());
@@ -64,7 +79,7 @@ public class FacturacionService {
     }
 
     // Eliminar una factura
-    public void deleteFacturacion(Integer id) { // Cambiado a Integer
+    public void deleteFacturacion(Integer id) {
         try {
             facturacionRepository.findById(id)
                     .orElseThrow(() -> new IllegalArgumentException("Factura no encontrada con ID: " + id));

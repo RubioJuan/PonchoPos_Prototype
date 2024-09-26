@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ClienteService {
@@ -36,27 +38,44 @@ public class ClienteService {
     // Guardar un cliente
     public Clientes saveCliente(Clientes clientes) {
         try {
-            // Validar que los campos requeridos no sean nulos
-            if (clientes.getNombre() == null || clientes.getNombre().isEmpty()) {
-                throw new IllegalArgumentException("El nombre del cliente es obligatorio");
-            }
-            // Otras validaciones según sea necesario
+            Map<String, String> campos = new HashMap<>();
+            campos.put("Documento", clientes.getDocumento());
+            campos.put("Nombre", clientes.getNombre());
+            campos.put("Apellido", clientes.getApellido());
+            campos.put("Pais", clientes.getPais());
+            campos.put("Ciudad", clientes.getCiudad());
+            campos.put("Email", clientes.getEmail());
+            campos.put("Teléfono", clientes.getTelefono());
+            campos.put("Dirección", clientes.getDireccion());
+            campos.put("Fecha de nacimiento", clientes.getFecha_nacimiento());
 
+            for (Map.Entry<String, String> campo : campos.entrySet()) {
+                if (campo.getValue() == null || campo.getValue().isEmpty()) {
+                    throw new IllegalArgumentException("El " + campo.getKey() + " del cliente es obligatorio");
+                }
+            }
             return clientesRepository.save(clientes);
         } catch (DataAccessException ex) {
             throw new RuntimeException("Error al guardar el cliente", ex);
         }
     }
 
+
     // Actualizar un cliente
     public Clientes updateCliente(int id, Clientes clientesDetails) {
         try {
             Clientes cliente = clientesRepository.findById(id)
                     .orElseThrow(() -> new IllegalArgumentException("Cliente no encontrado con ID: " + id));
+            cliente.setDocumento(clientesDetails.getDocumento());
             cliente.setNombre(clientesDetails.getNombre());
-            cliente.setDireccion(clientesDetails.getDireccion());
+            cliente.setApellido(clientesDetails.getApellido());
+            cliente.setPais(clientesDetails.getPais());
+            cliente.setCiudad(clientesDetails.getCiudad());
+            cliente.setEmail(clientesDetails.getEmail());
             cliente.setTelefono(clientesDetails.getTelefono());
-            // Agrega otras actualizaciones según sea necesario
+            cliente.setDireccion(clientesDetails.getDireccion());
+            cliente.setFecha_nacimiento(clientesDetails.getFecha_nacimiento());
+            cliente.setEstado(clientesDetails.isEstado());
             return clientesRepository.save(cliente);
         } catch (DataAccessException ex) {
             throw new RuntimeException("Error al actualizar el cliente con ID: " + id, ex);
