@@ -22,6 +22,8 @@ public class Clientes {
     private String fecha_nacimiento;
     private boolean estado;
 
+    public Clientes(){}
+
     public Clientes(int id_cliente, String documento, String nombre, String apellido, String pais, String ciudad, String email, String telefono, String direccion, String fecha_nacimiento, boolean estado) {
         this.id_cliente = id_cliente;
         this.documento = documento;
