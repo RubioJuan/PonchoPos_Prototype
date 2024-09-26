@@ -2,7 +2,6 @@ package com.example.PonchoPOS.service;
 
 import com.example.PonchoPOS.model.Categoria;
 import com.example.PonchoPOS.repository.CategoriaRepository;
-import com.example.PonchoPOS.exception.ResourceNotFoundException; // Clase personalizada
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -16,7 +15,7 @@ public class CategoriaService {
     @Autowired
     private CategoriaRepository categoriaRepository;
 
-    //Obtener todas las categorias
+    // Obtener todas las categorías
     public List<Categoria> getAllCategorias() {
         try {
             return categoriaRepository.findAll();
@@ -25,7 +24,7 @@ public class CategoriaService {
         }
     }
 
-    //Obtener categoria por id
+    // Obtener una categoría por ID
     public Optional<Categoria> getCategoryByID(Long id) {
         try {
             return categoriaRepository.findById(id);
@@ -34,7 +33,7 @@ public class CategoriaService {
         }
     }
 
-    //Registrar Categorias
+    // Guardar una categoría
     public Categoria saveCategoria(Categoria categoria) {
         try {
             return categoriaRepository.save(categoria);
@@ -43,11 +42,11 @@ public class CategoriaService {
         }
     }
 
-    //Actualizar Categorias
+    // Actualizar una categoría
     public Categoria updateCategoria(Long id, Categoria categoriaDetails) {
         try {
             Categoria categoria = categoriaRepository.findById(id)
-                    .orElseThrow(() -> new ResourceNotFoundException("Categoría no encontrada con ID: " + id));
+                    .orElseThrow(() -> new IllegalArgumentException("Categoría no encontrada con ID: " + id));
             categoria.setNombre(categoriaDetails.getNombre());
             categoria.setUbicacion(categoriaDetails.getUbicacion());
             categoria.setDescripcion(categoriaDetails.getDescripcion());
@@ -58,15 +57,14 @@ public class CategoriaService {
         }
     }
 
-    //Eliminar Categorias
+    // Eliminar una categoría
     public void deleteCategoria(Long id) {
         try {
             Categoria categoria = categoriaRepository.findById(id)
-                    .orElseThrow(() -> new ResourceNotFoundException("Categoría no encontrada con ID: " + id));
+                    .orElseThrow(() -> new IllegalArgumentException("Categoría no encontrada con ID: " + id));
             categoriaRepository.deleteById(id);
         } catch (DataAccessException ex) {
             throw new RuntimeException("Error al eliminar la categoría con ID: " + id, ex);
         }
     }
 }
-
