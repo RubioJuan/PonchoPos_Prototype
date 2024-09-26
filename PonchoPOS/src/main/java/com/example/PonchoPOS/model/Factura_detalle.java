@@ -27,6 +27,10 @@ public class Factura_detalle {
         this.subtotal = subtotal;
     }
 
+    public Factura_detalle() {
+
+    }
+
     public int getId_detalle() {
         return id_detalle;
     }

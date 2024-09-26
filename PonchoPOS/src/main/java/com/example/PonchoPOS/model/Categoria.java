@@ -25,6 +25,10 @@ public class Categoria {
         this.activo = activo;
     }
 
+    public Categoria() {
+
+    }
+
     public int getId_categoria() {
         return id_categoria;
     }

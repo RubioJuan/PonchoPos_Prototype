@@ -34,6 +34,10 @@ public class Inventario {
         this.id_categoria = id_categoria;
     }
 
+    public Inventario() {
+
+    }
+
     public int getId_producto() {
         return id_producto;
     }
