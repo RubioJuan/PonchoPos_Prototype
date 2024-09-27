@@ -10,16 +10,6 @@ body {
     color: #2c3e50;
 }
 
-/* Estilos para el título principal */
-h1 {
-    color: #2c3e50;
-    padding: 20px;
-    text-align: center;
-    margin: 0;
-    border-bottom: 2px solid #28a745;
-    font-size: 36px;
-}
-
 /* Contenedor principal */
 .container {
     background: rgba(255, 255, 255, 0.8); /* Fondo blanco semitransparente */
@@ -28,6 +18,23 @@ h1 {
     margin: 40px auto;
     border-radius: 10px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Sombra */
+}
+
+/* Estilos para el título principal dentro del contenedor */
+h1 {
+    color: #2c3e50;
+    padding: 10px 0;
+    text-align: center;
+    margin: 0;
+    font-size: 36px;
+}
+
+/* Línea verde debajo del título */
+.title-separator {
+    width: 100%;
+    height: 5px;
+    background-color: #28a745;
+    margin: 20px 0; /* Separación */
 }
 
 /* Estilos para el formulario */
@@ -85,6 +92,11 @@ table tr:nth-child(even) {
 }
 
 /* Botones de acción */
+.actions {
+    display: flex;
+    gap: 10px;
+}
+
 .edit-btn, .delete-btn {
     padding: 5px 10px;
     border-radius: 5px;

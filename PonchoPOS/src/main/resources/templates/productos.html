@@ -4,11 +4,7 @@
     <meta charset="UTF-8">
     <title>Gestión de Productos</title>
     <link rel="stylesheet" th:href="@{/css/productos.css}">
-    <script>
-        function confirmDelete() {
-            return confirm("¿Estás seguro de que deseas eliminar este producto?");
-        }
-    </script>
+    <script src="/js/productos.js" defer></script> <!-- Enlace al archivo JS -->
 </head>
 <body>
     <h1>Gestión de Productos</h1>
@@ -43,8 +39,8 @@
                 <td th:text="${inventario.fecha_ingreso}"></td>
                 <td>
                     <!-- Enlaces para editar y eliminar producto -->
-                    <a th:href="@{/PonchoPos/inventario/editar/{id}(id=${inventario.id_producto})}">Editar</a> |
-                    <a th:href="@{/PonchoPos/inventario/eliminar/{id}(id=${inventario.id_producto})}" onclick="return confirmDelete();">Eliminar</a>
+                    <a th:href="@{/PonchoPos/inventario/editar/{id}(id=${inventario.id_producto})}" class="edit-btn">Editar</a> |
+                    <a th:href="@{/PonchoPos/inventario/eliminar/{id}(id=${inventario.id_producto})}" class="delete-btn">Eliminar</a>
                 </td>
             </tr>
         </tbody>
@@ -84,7 +80,5 @@
 
         <button type="submit" th:text="${inventario.id_producto != null ? 'Guardar' : 'Actualizar'}"></button>
     </form>
-    
-    <script th:src="@{/js/productos.js}"></script>
 </body>
 </html>

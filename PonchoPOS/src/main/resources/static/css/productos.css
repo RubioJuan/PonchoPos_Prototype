@@ -3,12 +3,21 @@ body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background-image: url('../Img/Fondo3.jpg'); /* Imagen de fondo */
+    background-image: url('/Img/CampesinoFondo2.png'); /* Imagen de fondo */
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
     color: #2c3e50;
-    overflow-x: hidden;
+}
+
+/* Contenedor principal */
+.main-container {
+    background: rgba(255, 255, 255, 0.8); /* Fondo blanco semitransparente */
+    padding: 50px;
+    max-width: 1500px;
+    margin: 40px auto;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Sombra */
 }
 
 /* Estilos para el título principal */
@@ -17,187 +26,123 @@ h1 {
     padding: 20px;
     text-align: center;
     margin: 0;
-    border-bottom: 4px solid #28a745;
     font-size: 36px;
-    background: rgba(255, 255, 255, 0.85); /* Fondo blanco semitransparente */
+    position: relative; /* Para posicionar la línea con precisión */
+    border-bottom: 2px solid #28a745; /* Línea verde bajo el título */
 }
 
-/* Contenedor principal */
-.container {
-    background: rgba(255, 255, 255, 0.8); /* Fondo blanco semitransparente */
-    padding: 30px;
-    max-width: 90%; /* Ajuste para responsive */
-    margin: 40px auto;
-    border-radius: 15px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra */
+/* Estilos para los títulos de sección */
+h2 {
+    color: #555;
+    margin-top: 20px; /* Espacio encima del título */
 }
 
 /* Estilos para el formulario */
+form {
+    background-color: rgba(255, 255, 255, 0.9); /* Fondo del formulario */
+    padding: 20px;
+    margin-top: 20px;
+    margin-left: 2cm; /* Espacio a la izquierda */
+    margin-right: 2cm; /* Espacio a la derecha */
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: auto; /* Ajuste automático del ancho */
+    box-sizing: border-box; /* Asegurarse de que el formulario ocupe todo el ancho */
+}
+
 form label {
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     font-weight: bold;
-    color: #2c3e50;
 }
 
 form input[type="text"],
 form input[type="number"],
 form input[type="date"],
-form textarea {
+form textarea,
+form button {
     width: 100%;
-    padding: 12px;
-    margin-bottom: 15px;
+    padding: 10px;
+    margin: 5px 0 20px;
     border: 1px solid #ccc;
-    border-radius: 10px;
-    background: rgba(255, 255, 255, 0.9); /* Fondo semitransparente */
-    transition: all 0.3s ease;
+    border-radius: 4px;
+    box-sizing: border-box; /* Asegurarse de que el padding se incluya en el ancho */
 }
 
-form input:focus,
-form textarea:focus {
-    border-color: #28a745;
-    background: rgba(255, 255, 255, 1);
-}
-
+/* Botón del formulario */
 form button {
     background-color: #28a745; /* Botón verde */
     color: white;
-    padding: 12px 24px;
     border: none;
-    border-radius: 10px;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
 }
 
 form button:hover {
     background-color: #218838; /* Efecto hover */
-    transform: translateY(-2px);
-}
-
-form button:active {
-    background-color: #1e7e34;
 }
 
 /* Estilos para la tabla */
 table {
-    width: 100%;
+    width: calc(100% - 4cm); /* Ajustar el ancho para dejar espacio a ambos lados */
     border-collapse: collapse;
-    margin-top: 20px;
+    margin: 20px auto; /* Centrar la tabla con margen automático */
     background: rgba(255, 255, 255, 0.9); /* Fondo de la tabla */
-    border-radius: 10px;
+    border-radius: 5px; /* Esquinas redondeadas para la tabla */
     overflow: hidden;
 }
 
-table th, table td {
-    padding: 15px;
+th, td {
+    padding: 12px;
     text-align: left;
     border: 1px solid #ddd;
-    transition: background-color 0.3s ease;
 }
 
-table th {
+th {
     background-color: #28a745; /* Fondo de los encabezados */
     color: white;
-    font-size: 18px;
 }
 
-table td {
-    font-size: 16px;
-}
-
-table tr:nth-child(even) {
+tr:nth-child(even) {
     background-color: rgba(0, 0, 0, 0.05); /* Rayado en filas */
 }
 
-table tr:hover {
-    background-color: rgba(40, 167, 69, 0.2); /* Efecto hover en filas */
+tr:hover {
+    background-color: rgba(0, 0, 0, 0.1); /* Efecto hover para filas */
 }
 
 /* Botones de acción */
-.edit-btn, .delete-btn {
-    padding: 8px 15px;
-    border-radius: 8px;
+a {
+    padding: 5px 10px;
+    border-radius: 5px;
     text-decoration: none;
     color: white;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    display: inline-block;
+    margin-right: 10px; /* Espacio a la derecha */
 }
 
-.edit-btn {
-    background-color: #007bff;
+a.edit-btn {
+    background-color: #007bff; /* Botón de editar */
 }
 
-.delete-btn {
-    background-color: #dc3545;
+a.delete-btn {
+    background-color: #dc3545; /* Botón de eliminar */
 }
 
-.edit-btn:hover {
-    background-color: #0056b3;
-    transform: translateY(-2px);
+a.edit-btn:hover {
+    background-color: #0056b3; /* Efecto hover de editar */
 }
 
-.delete-btn:hover {
-    background-color: #c82333;
-    transform: translateY(-2px);
+a.delete-btn:hover {
+    background-color: #c82333; /* Efecto hover de eliminar */
 }
 
-/* Efectos de botones */
-.edit-btn:active, .delete-btn:active {
-    transform: translateY(0px);
+/* Contenedor de acciones en la tabla */
+td:last-child {
+    display: flex;
+    justify-content: space-between; /* Espacio entre botones */
 }
 
-/* Responsividad */
-@media (max-width: 768px) {
-    /* Estilos para dispositivos medianos y pequeños */
-    body {
-        padding: 10px;
-    }
-
-    .container {
-        padding: 20px;
-        max-width: 100%;
-    }
-
-    h1 {
-        font-size: 28px;
-    }
-
-    table th, table td {
-        padding: 10px;
-        font-size: 14px;
-    }
-
-    form input[type="text"],
-    form input[type="number"],
-    form input[type="date"],
-    form textarea {
-        font-size: 14px;
-    }
-
-    form button {
-        width: 100%; /* Botón en ancho completo */
-        padding: 12px;
-    }
-
-    .edit-btn, .delete-btn {
-        width: 48%; /* Ajuste para botones de acción */
-        margin: 2px 1%;
-    }
-}
-
-@media (max-width: 480px) {
-    /* Estilos para dispositivos móviles */
-    h1 {
-        font-size: 24px;
-    }
-
-    table th, table td {
-        font-size: 12px;
-    }
-
-    .edit-btn, .delete-btn {
-        width: 100%;
-        margin-bottom: 5px;
-    }
+/* Ajustes de espaciado */
+td {
+    vertical-align: middle; /* Alinear verticalmente el contenido */
 }

@@ -1,28 +1,41 @@
-document.addEventListener("DOMContentLoaded", function() {
-    // Selecciona el formulario y los botones
-    const form = document.getElementById("inventarioForm");
-    const submitButton = form.querySelector("button[type='submit']");
+// Función para confirmar la eliminación de un producto
+function confirmDelete() {
+    return confirm("¿Estás seguro de que deseas eliminar este producto?");
+}
 
-    // Función para animar el formulario
-    function toggleFormAnimation() {
-        form.classList.add("animate__animated", "animate__fadeIn");
-        setTimeout(() => {
-            form.classList.remove("animate__animated", "animate__fadeIn");
-        }, 1000); // Duración de la animación
-    }
+// Añadir evento de carga para agregar interactividad
+document.addEventListener('DOMContentLoaded', function() {
+    // Seleccionar todos los botones de eliminar y editar
+    const deleteButtons = document.querySelectorAll('.delete-btn');
+    const editButtons = document.querySelectorAll('.edit-btn');
 
-    // Ejecutar la animación al cargar el formulario
-    toggleFormAnimation();
-
-    // Agregar efecto hover a los botones
-    const buttons = document.querySelectorAll("button, .edit-btn, .delete-btn");
-    buttons.forEach(button => {
-        button.addEventListener("mouseover", function() {
-            this.style.transform = "scale(1.05)";
-            this.style.transition = "transform 0.2s";
+    // Agregar eventos a los botones de eliminar
+    deleteButtons.forEach(button => {
+        button.addEventListener('click', function(event) {
+            if (!confirmDelete()) {
+                event.preventDefault(); // Cancelar la acción si no se confirma
+            }
         });
-        button.addEventListener("mouseout", function() {
-            this.style.transform = "scale(1)";
+    });
+
+    // Añadir animación de hover a los botones de acción
+    editButtons.forEach(button => {
+        button.style.transition = 'background-color 0.3s ease';
+        button.addEventListener('mouseover', function() {
+            button.style.backgroundColor = '#0056b3'; // Cambiar a un tono más oscuro
+        });
+        button.addEventListener('mouseout', function() {
+            button.style.backgroundColor = '#007bff'; // Volver al color original
+        });
+    });
+
+    deleteButtons.forEach(button => {
+        button.style.transition = 'background-color 0.3s ease';
+        button.addEventListener('mouseover', function() {
+            button.style.backgroundColor = '#c82333'; // Cambiar a un tono más oscuro
+        });
+        button.addEventListener('mouseout', function() {
+            button.style.backgroundColor = '#dc3545'; // Volver al color original
         });
     });
 });
