@@ -1,3 +1,4 @@
+-- SQLBook: Code
 use PonchoPos;
 -- Datos de prueba para la tabla categoria
 INSERT INTO categoria (nombre, ubicacion, descripcion) VALUES ('Electrónica', 'Primer Piso', 'Artículos electrónicos y gadgets');

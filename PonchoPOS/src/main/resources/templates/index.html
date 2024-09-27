@@ -3,26 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRUD Categorías</title>
+    <title>PonchoPos</title>
     <link rel="stylesheet" href="../static/css/styles.css"> <!-- Asegúrate de tener tu CSS separado -->
+    <link rel="shortcut icon" href="../Img/Logo.jpg" type="image/x-icon">
 </head>
 <body>
-    <h1>Gestión de Categorías</h1>
-
-    <form id="categoriaForm">
-        <input type="hidden" id="categoriaId" value="">
-        <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" required placeholder="Ingrese el nombre">
-        <label for="descripcion">Descripción:</label>
-        <input type="text" id="descripcion" required placeholder="Ingrese la descripción">
-        <button type="submit">Guardar Categoría</button>
-    </form>
-
-    <div class="category-list">
-        <h2>Lista de Categorías</h2>
-        <div id="categorias"></div>
+    <header>
+        <h1>Bienvenido a PonchoPOS</h1>
+        <p>Gestiona tus categorías, inventario, clientes y facturación</p>
+    </header>
+    
+    <div class="container">
+        <div class="card">
+            <img src="https://via.placeholder.com/300x200" alt="Categorías">
+            <h2>Categorías</h2>
+            <p>Gestiona todas las categorías de productos</p>
+            <a href="/PonchoPos/categoria">Ver Categorías</a>
+        </div>
+    
+        <div class="card">
+            <img src="https://via.placeholder.com/300x200" alt="Inventario">
+            <h2>Inventario</h2>
+            <p>Revisa el stock de productos y actualiza su información</p>
+            <a href="/PonchoPos/inventario">Ver Inventario</a>
+        </div>
+    
+        <div class="card">
+            <img src="https://via.placeholder.com/300x200" alt="Clientes">
+            <h2>Clientes</h2>
+            <p>Consulta y administra la información de tus clientes</p>
+            <a href="/PonchoPos/clientes">Ver Clientes</a>
+        </div>
+    
+        <div class="card">
+            <img src="https://via.placeholder.com/300x200" alt="Facturación">
+            <h2>Facturación</h2>
+            <p>Accede a todas las facturas generadas y sus detalles</p>
+            <a href="/PonchoPos/facturacion">Ver Facturación</a>
+        </div>
     </div>
-
-    <script src="../static/js/scripts.js"></script> <!-- Incluyendo el JavaScript externo -->
+    
+    <footer>
+        <p>&copy; 2024 PonchoPOS - Todos los derechos reservados</p>
+    </footer>
 </body>
+    <script src="../static/js/scripts.js"></script> <!-- Incluyendo el JavaScript externo -->
 </html>

@@ -1,3 +1,4 @@
+-- SQLBook: Code
 drop database if exists PonchoPos;
 create database PonchoPos;
 use PonchoPos;
