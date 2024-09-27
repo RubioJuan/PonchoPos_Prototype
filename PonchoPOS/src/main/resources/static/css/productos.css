@@ -3,7 +3,7 @@ body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background-image: url('/Img/CampesinoFondo2.png'); /* Imagen de fondo */
+    background-image: url('/Img/Fondo3.jpg'); /* Imagen de fondo */
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -11,45 +11,38 @@ body {
 }
 
 /* Contenedor principal */
-.main-container {
+.container {
     background: rgba(255, 255, 255, 0.8); /* Fondo blanco semitransparente */
-    padding: 50px;
-    max-width: 1500px;
+    padding: 30px;
+    max-width: 1200px;
     margin: 40px auto;
     border-radius: 10px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Sombra */
 }
 
-/* Estilos para el título principal */
+/* Estilos para el título principal dentro del contenedor */
 h1 {
     color: #2c3e50;
-    padding: 20px;
+    padding: 10px 0;
     text-align: center;
     margin: 0;
     font-size: 36px;
-    position: relative; /* Para posicionar la línea con precisión */
-    border-bottom: 2px solid #28a745; /* Línea verde bajo el título */
 }
 
-/* Estilos para los títulos de sección */
-h2 {
-    color: #555;
-    margin-top: 20px; /* Espacio encima del título */
+/* Línea verde debajo del título */
+.title-separator {
+    width: 100%;
+    height: 5px;
+    background-color: #28a745;
+    margin: 20px 0; /* Separación */
+}
+
+/* Estilos para las secciones */
+.section-container {
+    margin-top: 20px;
 }
 
 /* Estilos para el formulario */
-form {
-    background-color: rgba(255, 255, 255, 0.9); /* Fondo del formulario */
-    padding: 20px;
-    margin-top: 20px;
-    margin-left: 2cm; /* Espacio a la izquierda */
-    margin-right: 2cm; /* Espacio a la derecha */
-    border-radius: 5px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    width: auto; /* Ajuste automático del ancho */
-    box-sizing: border-box; /* Asegurarse de que el formulario ocupe todo el ancho */
-}
-
 form label {
     display: block;
     margin-bottom: 5px;
@@ -59,21 +52,21 @@ form label {
 form input[type="text"],
 form input[type="number"],
 form input[type="date"],
-form textarea,
-form button {
+form textarea {
     width: 100%;
     padding: 10px;
-    margin: 5px 0 20px;
+    margin-bottom: 15px;
     border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box; /* Asegurarse de que el padding se incluya en el ancho */
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.7); /* Fondo semitransparente */
 }
 
-/* Botón del formulario */
 form button {
     background-color: #28a745; /* Botón verde */
     color: white;
+    padding: 10px 20px;
     border: none;
+    border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
@@ -84,65 +77,52 @@ form button:hover {
 
 /* Estilos para la tabla */
 table {
-    width: calc(100% - 4cm); /* Ajustar el ancho para dejar espacio a ambos lados */
+    width: 100%;
     border-collapse: collapse;
-    margin: 20px auto; /* Centrar la tabla con margen automático */
+    margin-top: 20px;
     background: rgba(255, 255, 255, 0.9); /* Fondo de la tabla */
-    border-radius: 5px; /* Esquinas redondeadas para la tabla */
-    overflow: hidden;
 }
 
-th, td {
+table th, table td {
     padding: 12px;
     text-align: left;
     border: 1px solid #ddd;
 }
 
-th {
+table th {
     background-color: #28a745; /* Fondo de los encabezados */
     color: white;
 }
 
-tr:nth-child(even) {
+table tr:nth-child(even) {
     background-color: rgba(0, 0, 0, 0.05); /* Rayado en filas */
 }
 
-tr:hover {
-    background-color: rgba(0, 0, 0, 0.1); /* Efecto hover para filas */
+/* Botones de acción */
+.actions {
+    display: flex;
+    gap: 10px;
 }
 
-/* Botones de acción */
-a {
+.edit-btn, .delete-btn {
     padding: 5px 10px;
     border-radius: 5px;
     text-decoration: none;
     color: white;
-    margin-right: 10px; /* Espacio a la derecha */
 }
 
-a.edit-btn {
-    background-color: #007bff; /* Botón de editar */
+.edit-btn {
+    background-color: #007bff;
 }
 
-a.delete-btn {
-    background-color: #dc3545; /* Botón de eliminar */
+.delete-btn {
+    background-color: #dc3545;
 }
 
-a.edit-btn:hover {
-    background-color: #0056b3; /* Efecto hover de editar */
+.edit-btn:hover {
+    background-color: #0056b3;
 }
 
-a.delete-btn:hover {
-    background-color: #c82333; /* Efecto hover de eliminar */
-}
-
-/* Contenedor de acciones en la tabla */
-td:last-child {
-    display: flex;
-    justify-content: space-between; /* Espacio entre botones */
-}
-
-/* Ajustes de espaciado */
-td {
-    vertical-align: middle; /* Alinear verticalmente el contenido */
+.delete-btn:hover {
+    background-color: #c82333;
 }
