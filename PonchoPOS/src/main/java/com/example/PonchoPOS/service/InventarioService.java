@@ -1,14 +1,15 @@
 package com.example.PonchoPOS.service;
 
-import com.example.PonchoPOS.model.Inventario;
-import com.example.PonchoPOS.repository.CategoriaRepository;
-import com.example.PonchoPOS.repository.InventarioRepository;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import com.example.PonchoPOS.model.Inventario;
+import com.example.PonchoPOS.repository.CategoriaRepository;
+import com.example.PonchoPOS.repository.InventarioRepository;
 
 @Service
 public class InventarioService {
@@ -70,7 +71,7 @@ public class InventarioService {
             inventario.setNombre(inventarioDetails.getNombre());
             inventario.setCantidad(inventarioDetails.getCantidad());
             inventario.setPrecio_costo(inventarioDetails.getPrecio_costo());
-            inventario.setIVA(inventarioDetails.getIVA());
+            inventario.setIva(inventarioDetails.getIva());
             inventario.setPrecio_venta(inventarioDetails.getPrecio_venta());
             inventario.setEan(inventarioDetails.getEan());
             inventario.setDescripcion(inventarioDetails.getDescripcion());

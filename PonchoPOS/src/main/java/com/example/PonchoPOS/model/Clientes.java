@@ -1,5 +1,7 @@
 package com.example.PonchoPOS.model;
 
+import java.sql.Date;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,12 +21,12 @@ public class Clientes {
     private String email;
     private String telefono;
     private String direccion;
-    private String fecha_nacimiento;
+    private Date fecha_nacimiento;
     private boolean estado;
 
     public Clientes(){}
 
-    public Clientes(int id_cliente, String documento, String nombre, String apellido, String pais, String ciudad, String email, String telefono, String direccion, String fecha_nacimiento, boolean estado) {
+    public Clientes(int id_cliente, String documento, String nombre, String apellido, String pais, String ciudad, String email, String telefono, String direccion, Date fecha_nacimiento, boolean estado) {
         this.id_cliente = id_cliente;
         this.documento = documento;
         this.nombre = nombre;
@@ -110,11 +112,11 @@ public class Clientes {
         this.direccion = direccion;
     }
 
-    public String getFecha_nacimiento() {
+    public Date getFecha_nacimiento() {
         return fecha_nacimiento;
     }
 
-    public void setFecha_nacimiento(String fecha_nacimiento) {
+    public void setFecha_nacimiento(Date fecha_nacimiento) {
         this.fecha_nacimiento = fecha_nacimiento;
     }
 

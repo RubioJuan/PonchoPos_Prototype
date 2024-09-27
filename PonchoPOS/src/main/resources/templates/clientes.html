@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestión de Clientes</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/clientes.css}">
+</head>
+<body>
+    <!-- Contenedor principal que incluye todo el contenido -->
+    <div class="main-container">
+        <!-- Título principal -->
+        <h1>Gestión de Clientes</h1>
+
+        <!-- Sección: Lista de Clientes -->
+        <section>
+            <h2>Lista de Clientes</h2>
+            <div class="container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Documento</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>País</th>
+                            <th>Ciudad</th>
+                            <th>Email</th>
+                            <th>Teléfono</th>
+                            <th>Dirección</th>
+                            <th>Fecha de Nacimiento</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="cliente : ${clientes}">
+                            <td th:text="${cliente.id_cliente}"></td>
+                            <td th:text="${cliente.documento}"></td>
+                            <td th:text="${cliente.nombre}"></td>
+                            <td th:text="${cliente.apellido}"></td>
+                            <td th:text="${cliente.pais}"></td>
+                            <td th:text="${cliente.ciudad}"></td>
+                            <td th:text="${cliente.email}"></td>
+                            <td th:text="${cliente.telefono}"></td>
+                            <td th:text="${cliente.direccion}"></td>
+                            <td th:text="${cliente.fecha_nacimiento != null ? #dates.format(cliente.fecha_nacimiento, 'yyyy-MM-dd') : ''}"></td>
+                            <td th:text="${cliente.estado ? 'Activo' : 'Inactivo'}"></td>
+                            <td class="acciones">
+                                <a class="edit-btn" th:href="@{/PonchoPos/Cliente/editar/{id}(id=${cliente.id_cliente})}">Editar</a>
+                                <a class="delete-btn" th:href="@{/PonchoPos/Cliente/eliminar/{id}(id=${cliente.id_cliente})}" 
+                                   onclick="return confirm('¿Estás seguro de eliminar esta categoría?');">Eliminar</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Sección: Formulario para Agregar o Editar Cliente -->
+        <section>
+            <h2 th:text="${cliente.id_cliente != null ? 'Editar Cliente' : 'Agregar Cliente'}"></h2>
+            <div class="container">
+                <form th:action="@{/PonchoPos/Cliente}" th:object="${cliente}" method="post" id="clienteForm">
+                    <input type="hidden" th:field="*{id_cliente}" />
+
+                    <label for="documento">Documento:</label>
+                    <input type="text" id="documento" th:field="*{documento}" required>
+
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" th:field="*{nombre}" required>
+
+                    <label for="apellido">Apellido:</label>
+                    <input type="text" id="apellido" th:field="*{apellido}" required>
+
+                    <label for="pais">País:</label>
+                    <input type="text" id="pais" th:field="*{pais}" required>
+
+                    <label for="ciudad">Ciudad:</label>
+                    <input type="text" id="ciudad" th:field="*{ciudad}" required>
+
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" th:field="*{email}" required>
+
+                    <label for="telefono">Teléfono:</label>
+                    <input type="text" id="telefono" th:field="*{telefono}" required>
+
+                    <label for="direccion">Dirección:</label>
+                    <input type="text" id="direccion" th:field="*{direccion}" required>
+
+                    <label for="fecha_nacimiento">Fecha de Nacimiento:</label>
+                    <input type="date" id="fecha_nacimiento" th:field="*{fecha_nacimiento}" 
+                           th:value="${cliente.fecha_nacimiento != null ? #dates.format(cliente.fecha_nacimiento, 'yyyy-MM-dd') : ''}" required>
+
+                    <label for="estado">Estado:</label>
+                    <input type="checkbox" id="estado" th:field="*{estado}" th:checked="${cliente.estado}">
+
+                    <button type="submit" th:text="${cliente.id_cliente != null ? 'Guardar' : 'Actualizar'}"></button>
+                </form>
+            </div>
+        </section>
+    </div>
+    <script th:src="@{/js/clientes.js}"></script>
+</body>
+</html>

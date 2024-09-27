@@ -38,27 +38,34 @@ public class ClienteService {
     // Guardar un cliente
     public Clientes saveCliente(Clientes clientes) {
         try {
-            Map<String, String> campos = new HashMap<>();
-            campos.put("Documento", clientes.getDocumento());
-            campos.put("Nombre", clientes.getNombre());
-            campos.put("Apellido", clientes.getApellido());
-            campos.put("Pais", clientes.getPais());
-            campos.put("Ciudad", clientes.getCiudad());
-            campos.put("Email", clientes.getEmail());
-            campos.put("Teléfono", clientes.getTelefono());
-            campos.put("Dirección", clientes.getDireccion());
-            campos.put("Fecha de nacimiento", clientes.getFecha_nacimiento());
-
-            for (Map.Entry<String, String> campo : campos.entrySet()) {
+            Map<String, String> camposTexto = new HashMap<>();
+            camposTexto.put("Documento", clientes.getDocumento());
+            camposTexto.put("Nombre", clientes.getNombre());
+            camposTexto.put("Apellido", clientes.getApellido());
+            camposTexto.put("Pais", clientes.getPais());
+            camposTexto.put("Ciudad", clientes.getCiudad());
+            camposTexto.put("Email", clientes.getEmail());
+            camposTexto.put("Teléfono", clientes.getTelefono());
+            camposTexto.put("Dirección", clientes.getDireccion());
+    
+            // Verificar campos de texto
+            for (Map.Entry<String, String> campo : camposTexto.entrySet()) {
                 if (campo.getValue() == null || campo.getValue().isEmpty()) {
                     throw new IllegalArgumentException("El " + campo.getKey() + " del cliente es obligatorio");
                 }
             }
+    
+            // Verificar fecha de nacimiento
+            if (clientes.getFecha_nacimiento() == null) {
+                throw new IllegalArgumentException("La fecha de nacimiento del cliente es obligatoria");
+            }
+    
             return clientesRepository.save(clientes);
         } catch (DataAccessException ex) {
             throw new RuntimeException("Error al guardar el cliente", ex);
         }
     }
+    
 
 
     // Actualizar un cliente

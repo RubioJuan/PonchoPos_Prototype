@@ -1,0 +1,203 @@
+/* Estilos generales */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('../Img/Fondo3.jpg'); /* Imagen de fondo */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: #2c3e50;
+    overflow-x: hidden;
+}
+
+/* Estilos para el título principal */
+h1 {
+    color: #2c3e50;
+    padding: 20px;
+    text-align: center;
+    margin: 0;
+    border-bottom: 4px solid #28a745;
+    font-size: 36px;
+    background: rgba(255, 255, 255, 0.85); /* Fondo blanco semitransparente */
+}
+
+/* Contenedor principal */
+.container {
+    background: rgba(255, 255, 255, 0.8); /* Fondo blanco semitransparente */
+    padding: 30px;
+    max-width: 90%; /* Ajuste para responsive */
+    margin: 40px auto;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra */
+}
+
+/* Estilos para el formulario */
+form label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+form input[type="text"],
+form input[type="number"],
+form input[type="date"],
+form textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.9); /* Fondo semitransparente */
+    transition: all 0.3s ease;
+}
+
+form input:focus,
+form textarea:focus {
+    border-color: #28a745;
+    background: rgba(255, 255, 255, 1);
+}
+
+form button {
+    background-color: #28a745; /* Botón verde */
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+form button:hover {
+    background-color: #218838; /* Efecto hover */
+    transform: translateY(-2px);
+}
+
+form button:active {
+    background-color: #1e7e34;
+}
+
+/* Estilos para la tabla */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: rgba(255, 255, 255, 0.9); /* Fondo de la tabla */
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+table th, table td {
+    padding: 15px;
+    text-align: left;
+    border: 1px solid #ddd;
+    transition: background-color 0.3s ease;
+}
+
+table th {
+    background-color: #28a745; /* Fondo de los encabezados */
+    color: white;
+    font-size: 18px;
+}
+
+table td {
+    font-size: 16px;
+}
+
+table tr:nth-child(even) {
+    background-color: rgba(0, 0, 0, 0.05); /* Rayado en filas */
+}
+
+table tr:hover {
+    background-color: rgba(40, 167, 69, 0.2); /* Efecto hover en filas */
+}
+
+/* Botones de acción */
+.edit-btn, .delete-btn {
+    padding: 8px 15px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: white;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: inline-block;
+}
+
+.edit-btn {
+    background-color: #007bff;
+}
+
+.delete-btn {
+    background-color: #dc3545;
+}
+
+.edit-btn:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.delete-btn:hover {
+    background-color: #c82333;
+    transform: translateY(-2px);
+}
+
+/* Efectos de botones */
+.edit-btn:active, .delete-btn:active {
+    transform: translateY(0px);
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    /* Estilos para dispositivos medianos y pequeños */
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        padding: 20px;
+        max-width: 100%;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    table th, table td {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    form input[type="text"],
+    form input[type="number"],
+    form input[type="date"],
+    form textarea {
+        font-size: 14px;
+    }
+
+    form button {
+        width: 100%; /* Botón en ancho completo */
+        padding: 12px;
+    }
+
+    .edit-btn, .delete-btn {
+        width: 48%; /* Ajuste para botones de acción */
+        margin: 2px 1%;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Estilos para dispositivos móviles */
+    h1 {
+        font-size: 24px;
+    }
+
+    table th, table td {
+        font-size: 12px;
+    }
+
+    .edit-btn, .delete-btn {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+}

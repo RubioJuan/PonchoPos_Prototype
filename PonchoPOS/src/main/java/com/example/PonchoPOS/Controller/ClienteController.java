@@ -3,50 +3,54 @@ package com.example.PonchoPOS.Controller;
 import com.example.PonchoPOS.model.Clientes;
 import com.example.PonchoPOS.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/PonchoPos/Cliente")
 public class ClienteController {
 
     @Autowired
     private ClienteService clienteService;
 
-    // Obtener todos los clientes
+    // Mostrar todos los clientes
     @GetMapping
-    public List<Clientes> getAllClientes() {
-        return clienteService.getAllClientes();
+    public String getAllClientes(Model model) {
+        List<Clientes> clientes = clienteService.getAllClientes();
+        model.addAttribute("clientes", clientes);
+        model.addAttribute("cliente", new Clientes()); // Inicializa un nuevo cliente para el formulario
+        return "clientes"; // Asegúrate de que la vista "clientes.html" esté en la carpeta correcta
     }
 
-    // Obtener un cliente por ID
-    @GetMapping("/{id}")
-    public Clientes getClienteById(@PathVariable int id) {
-        return clienteService.getClienteByID(id); // Cambiado a int, no se necesita Optional
+    // Formulario para actualizar un cliente existente
+    @GetMapping("/editar/{id}")
+    public String editarClienteForm(@PathVariable int id, Model model) {
+        Clientes cliente = clienteService.getClienteByID(id);
+        model.addAttribute("cliente", cliente);
+        return "clientes";  // Asegúrate de que la vista "clientes.html" esté configurada correctamente para editar
+    }
+
+    // Actualizar un cliente
+    @PostMapping("/editar/{id}")
+    public String updateCliente(@PathVariable int id, @ModelAttribute Clientes clientesDetails) {
+        clienteService.updateCliente(id, clientesDetails);
+        return "redirect:/PonchoPos/Cliente"; // Redirige a la lista de clientes después de actualizar
     }
 
     // Crear un cliente
     @PostMapping
-    public Clientes createCliente(@RequestBody Clientes clientes) {
-        return clienteService.saveCliente(clientes);
-    }
-
-    // Actualizar un cliente
-    @PutMapping("/{id}")
-    public Clientes updateCliente(@PathVariable int id, @RequestBody Clientes clientesDetails) {
-        return clienteService.updateCliente(id, clientesDetails);
+    public String crearClienteForm(@ModelAttribute Clientes clientes) {
+        clienteService.saveCliente(clientes);// Para el formulario de creación
+        return "redirect:/PonchoPos/Cliente"; // Muestra la vista de clientes
     }
 
     // Eliminar un cliente
-    @DeleteMapping("/{id}")
-    public void deleteCliente(@PathVariable int id) {
+    @GetMapping("/eliminar/{id}")
+    public String deleteCliente(@PathVariable int id) {
         clienteService.deleteCliente(id);
-    }
-
-    // Manejar excepciones
-    @ExceptionHandler(IllegalArgumentException.class)
-    public String handleNotFound(IllegalArgumentException ex) {
-        return ex.getMessage();
+        return "redirect:/PonchoPos/Cliente"; // Redirige a la lista de clientes
     }
 }

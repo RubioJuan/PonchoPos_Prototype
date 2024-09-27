@@ -3,16 +3,16 @@ body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background-image: url('../../Img/Logo.jpg'); /* Fondo de imagen */
+    background-image: url('/Img/CampesinoFondo.jpg'); /* Imagen de fondo */
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
     color: #2c3e50;
 }
 
+/* Estilos para el título principal */
 h1 {
-    background: rgba(0, 0, 0, 0.5); /* Fondo del título con semitransparencia */
-    color: white;
+    color: #2c3e50;
     padding: 20px;
     text-align: center;
     margin: 0;
@@ -22,8 +22,8 @@ h1 {
 
 /* Contenedor principal */
 .container {
-    background: rgba(255, 255, 255, 0.9); /* Fondo blanco semitransparente */
-    padding: 20px;
+    background: rgba(255, 255, 255, 0.8); /* Fondo blanco semitransparente */
+    padding: 30px;
     max-width: 1200px;
     margin: 40px auto;
     border-radius: 10px;
@@ -31,13 +31,6 @@ h1 {
 }
 
 /* Estilos para el formulario */
-.form-container {
-    background: rgba(255, 255, 255, 0.8); /* Fondo más claro */
-    padding: 20px;
-    border-radius: 10px;
-    margin-bottom: 20px;
-}
-
 form label {
     display: block;
     margin-bottom: 5px;
@@ -51,6 +44,7 @@ form textarea {
     margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    background: rgba(255, 255, 255, 0.7); /* Fondo semitransparente */
 }
 
 form button {
@@ -60,10 +54,56 @@ form button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 form button:hover {
     background-color: #218838; /* Efecto hover */
 }
 
+/* Estilos para la tabla */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: rgba(255, 255, 255, 0.9); /* Fondo de la tabla */
+}
 
+table th, table td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+table th {
+    background-color: #28a745; /* Fondo de los encabezados */
+    color: white;
+}
+
+table tr:nth-child(even) {
+    background-color: rgba(0, 0, 0, 0.05); /* Rayado en filas */
+}
+
+/* Botones de acción */
+.edit-btn, .delete-btn {
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: white;
+}
+
+.edit-btn {
+    background-color: #007bff;
+}
+
+.delete-btn {
+    background-color: #dc3545;
+}
+
+.edit-btn:hover {
+    background-color: #0056b3;
+}
+
+.delete-btn:hover {
+    background-color: #c82333;
+}

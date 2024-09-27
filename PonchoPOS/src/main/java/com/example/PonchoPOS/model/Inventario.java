@@ -1,5 +1,7 @@
 package com.example.PonchoPOS.model;
 
+import java.sql.Date;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,23 +14,23 @@ public class Inventario {
     private int id_producto;
 
     private String nombre;
-    private int cantidad;
+    private Integer cantidad;
     private double precio_costo;
-    private double IVA;
+    private double iva;
     private double precio_venta;
-    private String Ean;
+    private String ean;
     private String descripcion;
-    private String fecha_ingreso;
+    private Date fecha_ingreso;
     private int id_categoria;
 
-    public Inventario(int id_producto, String nombre, int cantidad, double precio_costo, double IVA, double precio_venta, String ean, String descripcion, String fecha_ingreso, int id_categoria) {
+    public Inventario(int id_producto, String nombre, Integer cantidad, double precio_costo, double iva, double precio_venta, String ean, String descripcion, Date fecha_ingreso, int id_categoria) {
         this.id_producto = id_producto;
         this.nombre = nombre;
         this.cantidad = cantidad;
         this.precio_costo = precio_costo;
-        this.IVA = IVA;
+        this.iva = iva;
         this.precio_venta = precio_venta;
-        this.Ean = ean;
+        this.ean = ean;
         this.descripcion = descripcion;
         this.fecha_ingreso = fecha_ingreso;
         this.id_categoria = id_categoria;
@@ -54,11 +56,11 @@ public class Inventario {
         this.nombre = nombre;
     }
 
-    public int getCantidad() {
+    public Integer getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(int cantidad) {
+    public void setCantidad(Integer cantidad) {
         this.cantidad = cantidad;
     }
 
@@ -70,12 +72,12 @@ public class Inventario {
         this.precio_costo = precio_costo;
     }
 
-    public double getIVA() {
-        return IVA;
+    public double getIva() {
+        return iva;
     }
 
-    public void setIVA(double IVA) {
-        this.IVA = IVA;
+    public void setIva(double iva) {
+        this.iva = iva;
     }
 
     public double getPrecio_venta() {
@@ -87,11 +89,11 @@ public class Inventario {
     }
 
     public String getEan() {
-        return Ean;
+        return ean;
     }
 
     public void setEan(String ean) {
-        Ean = ean;
+        this.ean = ean;
     }
 
     public String getDescripcion() {
@@ -102,11 +104,11 @@ public class Inventario {
         this.descripcion = descripcion;
     }
 
-    public String getFecha_ingreso() {
+    public Date getFecha_ingreso() {
         return fecha_ingreso;
     }
 
-    public void setFecha_ingreso(String fecha_ingreso) {
+    public void setFecha_ingreso(Date fecha_ingreso) {
         this.fecha_ingreso = fecha_ingreso;
     }
 
@@ -117,6 +119,5 @@ public class Inventario {
     public void setId_categoria(int id_categoria) {
         this.id_categoria = id_categoria;
     }
-
 
 }
