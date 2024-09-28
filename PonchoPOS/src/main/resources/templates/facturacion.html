@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestión de Facturación</title>
+    <link rel="stylesheet" th:href="@{/css/facturacion.css}">
+</head>
+<body>
+    <h1>Gestión de Facturación</h1>
+
+    <!-- Formulario para agregar nueva factura -->
+    <h2>Agregar Nueva Factura</h2>
+    <form th:action="@{/PonchoPos/facturacion}" method="post" th:object="${facturacion}">
+        <label for="numero_factura">Número de Factura:</label>
+        <input type="text" id="numero_factura" th:field="*{numero_factura}" required><br>
+
+        <label for="id_cliente">ID Cliente:</label>
+        <input type="number" id="id_cliente" th:field="*{id_cliente}" required><br>
+
+        <label for="fecha">Fecha:</label>
+        <input type="date" id="fecha" th:field="*{fecha}" required><br>
+
+        <label for="subtotal">Subtotal:</label>
+        <input type="number" id="subtotal" th:field="*{subtotal}" required step="0.01"><br>
+
+        <label for="descuento">Descuento:</label>
+        <input type="number" id="descuento" th:field="*{descuento}" step="0.01"><br>
+
+        <label for="iva_total">IVA Total:</label>
+        <input type="number" id="iva_total" th:field="*{iva_total}" required step="0.01"><br>
+
+        <label for="total">Total:</label>
+        <input type="number" id="total" th:field="*{total}" required step="0.01"><br>
+
+        <label for="metodo_pago">Método de Pago:</label>
+        <input type="text" id="metodo_pago" th:field="*{metodo_pago}" required><br>
+
+        <button type="submit">Guardar Factura</button>
+    </form>
+
+    <!-- Lista de facturas -->
+    <h2>Lista de Facturas</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Número de Factura</th>
+                <th>ID Cliente</th>
+                <th>Fecha</th>
+                <th>Total</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="factura : ${facturas}">
+                <td th:text="${factura.id_factura}"></td>
+                <td th:text="${factura.numero_factura}"></td>
+                <td th:text="${factura.id_cliente}"></td>
+                <td th:text="${factura.fecha}"></td>
+                <td th:text="${factura.total}"></td>
+                <td>
+                    <a th:href="@{/PonchoPos/facturacion/{id}(id=${factura.id_factura})}">Editar</a> |
+                    <a th:href="@{/PonchoPos/facturacion/eliminar/{id}(id=${factura.id_factura})}">Eliminar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Formulario para agregar nuevo detalle de factura -->
+    <h2>Agregar Nuevo Detalle de Factura</h2>
+    <form th:action="@{/PonchoPos/facturaDetalle/guardar}" method="post" th:object="${nuevoDetalle}">
+        <input type="hidden" th:field="*{id_factura}" value="${facturacion.id_factura}" />
+        
+        <label for="id_producto">ID Producto:</label>
+        <input type="number" id="id_producto" th:field="*{id_producto}" required><br>
+
+        <label for="cantidad">Cantidad:</label>
+        <input type="number" id="cantidad" th:field="*{cantidad}" required><br>
+
+        <label for="precio_unitario">Precio Unitario:</label>
+        <input type="number" id="precio_unitario" th:field="*{precio_unitario}" required step="0.01"><br>
+
+        <label for="subtotal">Subtotal:</label>
+        <input type="number" id="subtotal" th:field="*{subtotal}" required step="0.01"><br>
+
+        <button type="submit">Guardar Detalle</button>
+    </form>
+
+    <!-- Lista de detalles de facturas -->
+    <h2>Lista de Detalles de Factura</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>ID Factura</th>
+                <th>ID Producto</th>
+                <th>Cantidad</th>
+                <th>Precio Unitario</th>
+                <th>Subtotal</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="detalle : ${detalles}">
+                <td th:text="${detalle.id_detalle}"></td>
+                <td th:text="${detalle.id_factura}"></td>
+                <td th:text="${detalle.id_producto}"></td>
+                <td th:text="${detalle.cantidad}"></td>
+                <td th:text="${detalle.precio_unitario}"></td>
+                <td th:text="${detalle.subtotal}"></td>
+                <td>
+                    <a th:href="@{/PonchoPos/facturaDetalle/{id}(id=${detalle.id_detalle})}">Editar</a> |
+                    <a th:href="@{/PonchoPos/facturaDetalle/eliminar/{id}(id=${detalle.id_detalle})}">Eliminar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

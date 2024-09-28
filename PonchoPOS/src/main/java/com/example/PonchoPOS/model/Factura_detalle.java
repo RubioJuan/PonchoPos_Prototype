@@ -1,9 +1,6 @@
 package com.example.PonchoPOS.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Factura_detalle {
@@ -12,25 +9,18 @@ public class Factura_detalle {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_detalle;
 
-    private int id_factura;
+    @ManyToOne
+    @JoinColumn(name = "factura_id")
+    private Facturacion facturacion;
+
+    @Column(name = "id_producto")
     private int id_producto;
+
     private int cantidad;
     private double precio_unitario;
     private double subtotal;
 
-    public Factura_detalle(int id_detalle, int id_factura, int id_producto, int cantidad, double precio_unitario, double subtotal) {
-        this.id_detalle = id_detalle;
-        this.id_factura = id_factura;
-        this.id_producto = id_producto;
-        this.cantidad = cantidad;
-        this.precio_unitario = precio_unitario;
-        this.subtotal = subtotal;
-    }
-
-    public Factura_detalle() {
-
-    }
-
+    // Getters y Setters
     public int getId_detalle() {
         return id_detalle;
     }
@@ -39,12 +29,12 @@ public class Factura_detalle {
         this.id_detalle = id_detalle;
     }
 
-    public int getId_factura() {
-        return id_factura;
+    public Facturacion getFacturacion() {
+        return facturacion;
     }
 
-    public void setId_factura(int id_factura) {
-        this.id_factura = id_factura;
+    public void setFacturacion(Facturacion facturacion) {
+        this.facturacion = facturacion;
     }
 
     public int getId_producto() {

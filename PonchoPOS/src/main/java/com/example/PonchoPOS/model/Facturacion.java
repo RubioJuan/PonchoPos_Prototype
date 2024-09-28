@@ -1,9 +1,7 @@
 package com.example.PonchoPOS.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import java.util.Date;
 
 @Entity
 public class Facturacion {
@@ -13,8 +11,13 @@ public class Facturacion {
     private int id_factura;
 
     private String numero_factura;
+
+    @Column(name = "id_cliente")
     private int id_cliente;
-    private String fecha;
+
+    @Temporal(TemporalType.DATE)
+    private Date fecha;
+
     private double subtotal;
     private double descuento;
     private double iva_total;
@@ -23,24 +26,7 @@ public class Facturacion {
     private boolean factura_electronica;
     private String estado;
 
-    public Facturacion(int id_factura, String numero_factura, int id_cliente, String fecha, double subtotal, double descuento, double iva_total, double total, String metodo_pago, boolean factura_electronica, String estado) {
-        this.id_factura = id_factura;
-        this.numero_factura = numero_factura;
-        this.id_cliente = id_cliente;
-        this.fecha = fecha;
-        this.subtotal = subtotal;
-        this.descuento = descuento;
-        this.iva_total = iva_total;
-        this.total = total;
-        this.metodo_pago = metodo_pago;
-        this.factura_electronica = factura_electronica;
-        this.estado = estado;
-    }
-
-    public Facturacion() {
-
-    }
-
+    // Getters y Setters
     public int getId_factura() {
         return id_factura;
     }
@@ -65,11 +51,11 @@ public class Facturacion {
         this.id_cliente = id_cliente;
     }
 
-    public String getFecha() {
+    public Date getFecha() {
         return fecha;
     }
 
-    public void setFecha(String fecha) {
+    public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 
