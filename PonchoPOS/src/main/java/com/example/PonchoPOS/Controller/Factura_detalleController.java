@@ -1,60 +1,63 @@
 package com.example.PonchoPOS.Controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.example.PonchoPOS.model.Factura_detalle;
 import com.example.PonchoPOS.service.Factura_detalleService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Optional;
-
-@Controller
-@RequestMapping("/PonchoPos/facturaDetalle")
+@RestController
+@RequestMapping("/PonchoPos/factura_detaller")
 public class Factura_detalleController {
 
+    private final Factura_detalleService factura_detalleService;
+
     @Autowired
-    private Factura_detalleService facturaDetalleService;
+    public Factura_detalleController(Factura_detalleService factura_detalleService) {
+        this.factura_detalleService = factura_detalleService;
+    }
 
-    // Obtener todos los detalles de facturas
     @GetMapping
-    public String getAllDetalles(Model model) {
-        List<Factura_detalle> detalles = facturaDetalleService.getAllDetalles();
-        model.addAttribute("detalles", detalles);  // Pasamos los detalles al modelo para la vista
-        return "facturacion";  // Retornamos a la vista facturacion.html
+    public ResponseEntity<List<Factura_detalle>> getAllFacturaDetalles() {
+        List<Factura_detalle> detalles = factura_detalleService.getAllFacturaDetalles();
+        return ResponseEntity.ok(detalles);
     }
 
-    // Obtener un detalle de factura por ID
     @GetMapping("/{id}")
-    public String getDetalleById(@PathVariable int id, Model model) {
-        Optional<Factura_detalle> detalle = facturaDetalleService.getDetalleById(id);
-        if (detalle.isPresent()) {
-            model.addAttribute("detalle", detalle.get());  // Pasamos el detalle encontrado a la vista
-        } else {
-            model.addAttribute("error", "Detalle no encontrado");
+    public ResponseEntity<Factura_detalle> getFacturaDetalleById(@PathVariable Integer id) {
+        return factura_detalleService.getFacturaDetalleById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @PostMapping
+    public ResponseEntity<Factura_detalle> createFacturaDetalle(@RequestBody Factura_detalle factura_detalle) {
+        Factura_detalle createdDetalle = factura_detalleService.createFacturaDetalle(factura_detalle);
+        return ResponseEntity.status(201).body(createdDetalle);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Factura_detalle> updateFacturaDetalle(@PathVariable Integer id, @RequestBody Factura_detalle factura_detalle) {
+        return factura_detalleService.updateFacturaDetalle(id, factura_detalle)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteFacturaDetalle(@PathVariable Integer id) {
+        if (factura_detalleService.deleteFacturaDetalle(id)) {
+            return ResponseEntity.noContent().build();
         }
-        return "facturacion";  // Retornamos a la vista facturacion.html
-    }
-
-    // Crear un nuevo detalle de factura
-    @PostMapping("/guardar")
-    public String createDetalle(@ModelAttribute("nuevoDetalle") Factura_detalle facturaDetalle, Model model) {
-        facturaDetalleService.createDetalle(facturaDetalle);
-        return "redirect:/PonchoPos/facturaDetalle";  // Redirigimos a la página principal de facturacion
-    }
-
-    // Actualizar un detalle de factura
-    @PostMapping("/actualizar/{id}")
-    public String updateDetalle(@PathVariable int id, @ModelAttribute("detalle") Factura_detalle detalleDetails, Model model) {
-        facturaDetalleService.updateDetalle(id, detalleDetails);
-        return "redirect:/PonchoPos/facturaDetalle";  // Redirigimos a la página principal de facturacion
-    }
-
-    // Eliminar un detalle de factura
-    @GetMapping("/eliminar/{id}")
-    public String deleteDetalle(@PathVariable int id) {
-        facturaDetalleService.deleteDetalle(id);
-        return "redirect:/PonchoPos/facturaDetalle";  // Redirigimos a la página principal de facturacion
+        return ResponseEntity.notFound().build();
     }
 }
